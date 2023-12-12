@@ -1,5 +1,10 @@
 # https://github.com/pygame/pygame
 # https://github.com/pyinstaller/pyinstaller
+# Windows 下打包：pyinstaller -F -i "snow.ico" snow.py
+# Mac 下打包：pyinstaller -F -i "snow.icns" snow.py
+import os
+# 关闭掉 pygame 文档提示
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import random
 import sys
