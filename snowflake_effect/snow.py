@@ -1,8 +1,17 @@
-# https://github.com/pygame/pygame
-# https://github.com/pyinstaller/pyinstaller
-# Windows 下打包：pyinstaller -F -i "snow.ico" snow.py
-# Mac 下打包：pyinstaller -F -i "snow.icns" snow.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+""""
+雪花效果
+https://github.com/pygame/pygame
+https://github.com/pyinstaller/pyinstaller
+Windows 下打包：pyinstaller -F -i "snow.ico" snow.py
+Mac 下打包：pyinstaller -F -i "snow.icns" snow.py
+"""
+__author__ = 'alex'
+
 import os
+
 # 关闭掉 pygame 文档提示
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
