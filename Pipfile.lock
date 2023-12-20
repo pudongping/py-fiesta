@@ -1,17 +1,16 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0c0dd28d0170fb59a249a758f4bb0e566404ff8150c1addda9075c1d41d33f6b"
+            "sha256": "a9d782827498e988d5b8cc17b3fe5866e84ce0a69a24dae1f452295a68d3d1e0"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_full_version": "3.9.6",
-            "python_version": "3.9"
+            "python_version": "*"
         },
         "sources": [
             {
                 "name": "pypi",
-                "url": "https://pypi.org/simple",
+                "url": "https://pypi.tuna.tsinghua.edu.cn/simple",
                 "verify_ssl": true
             }
         ]
@@ -125,7 +124,7 @@
                 "sha256:fd1abc0d89e30cc4e02e4064dc67fcc51bd941eb395c502aac3ec19fab46b519",
                 "sha256:ff8fa367d09b717b2a17a052544193ad76cd49979c805768879cb63d9ca50561"
             ],
-            "markers": "python_full_version >= '3.7.0'",
+            "markers": "python_version >= '3.7'",
             "version": "==3.3.2"
         },
         "idna": {
@@ -221,7 +220,6 @@
                 "sha256:fe0228501ec616779a0b9c4299e837877783e18df294dd690b9ab0eed3d8aaab"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.6'",
             "version": "==2.5.2"
         },
         "pyinstaller": {
@@ -240,16 +238,15 @@
                 "sha256:e436fcc0ea87c3f132baac916d508c24c84a8f6d8a06c3154fbc753f169b76c7"
             ],
             "index": "pypi",
-            "markers": "python_version < '3.13' and python_version >= '3.8'",
             "version": "==6.3.0"
         },
         "pyinstaller-hooks-contrib": {
             "hashes": [
-                "sha256:4b4a998036abb713774cb26534ca06b7e6e09e4c628196017a10deb11a48747f",
-                "sha256:6dc1786a8f452941245d5bb85893e2a33632ebdcbc4c23eea41f2ee08281b0c0"
+                "sha256:5dd7a8a054a65c19cdaa381cabcfbe76f44d5f88d18214b0c570a0cd139be77f",
+                "sha256:f2a75dac2968ec81f92dcd3768906f654fa4204bc496126ae8483e87a5d89602"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==2023.10"
+            "version": "==2023.11"
         },
         "requests": {
             "hashes": [
@@ -257,16 +254,7 @@
                 "sha256:98b1b2782e3c6c4904938b84c0eb932721069dfdb9134313beff7c83c2df24bf"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.7' and python_version < '4'",
             "version": "==2.28.2"
-        },
-        "setuptools": {
-            "hashes": [
-                "sha256:1e8fdff6797d3865f37397be788a4e3cba233608e9b509382a2777d25ebde7f2",
-                "sha256:735896e78a4742605974de002ac60562d286fa8051a7e2299445e8e8fbb01aa6"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==69.0.2"
         },
         "urllib3": {
             "hashes": [
