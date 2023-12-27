@@ -1,3 +1,7 @@
+import os
+
+# 关闭掉 pygame 文档提示
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from random import randint, uniform, choice
 import math
