@@ -6,19 +6,29 @@ import pygame
 from random import randint, uniform, choice
 import math
 
+# 使用 pygame 库中的 vector 方法
 vector = pygame.math.Vector2
+# 定义重力
 gravity = vector(0, 0.3)
+# 定义显示宽度和高度
 DISPLAY_WIDTH = DISPLAY_HEIGHT = 800
 
+# 定义烟花的颜色
 trail_colours = [(45, 45, 45), (60, 60, 60), (75, 75, 75),
                  (125, 125, 125), (150, 150, 150)]
+
+# 定义烟花的动态和静态偏移量
 dynamic_offset = 1
 static_offset = 5
 
 
+# 定义烟花类
 class Firework:
 
     def __init__(self):
+        """
+        初始化烟花的颜色，位置，是否爆炸，粒子等属性
+        """
         self.colour = (randint(0, 255), randint(0, 255), randint(0, 255))
         self.colours = (
             (randint(0, 255), randint(0, 255), randint(0, 255)
@@ -31,6 +41,9 @@ class Firework:
         self.min_max_particles = vector(100, 225)
 
     def update(self, win):  # called every frame
+        """
+        更新烟花的状态，包括应用重力，移动烟花，显示烟花等
+        """
         if not self.exploded:
             self.firework.apply_force(gravity)
             self.firework.move()
@@ -52,16 +65,25 @@ class Firework:
                 particle.show(win)
 
     def explode(self):
+        """
+        爆炸函数，创建烟花粒子
+        """
         amount = randint(self.min_max_particles.x, self.min_max_particles.y)
         for i in range(amount):
             self.particles.append(
                 Particle(self.firework.pos.x, self.firework.pos.y, False, self.colours))
 
     def show(self, win):
+        """
+        在窗口上显示烟花
+        """
         pygame.draw.circle(win, self.colour, (int(self.firework.pos.x), int(
             self.firework.pos.y)), self.firework.size)
 
     def remove(self):
+        """
+        移除已爆炸的烟花
+        """
         if self.exploded:
             for p in self.particles:
                 if p.remove is True:
@@ -73,9 +95,17 @@ class Firework:
                 return False
 
 
+# 定义粒子类
 class Particle:
 
     def __init__(self, x, y, firework, colour):
+        """
+        初始化粒子的位置，大小，颜色，是否为烟花，速度等参数
+        :param x:
+        :param y:
+        :param firework:
+        :param colour:
+        """
         self.firework = firework
         self.pos = vector(x, y)
         self.origin = vector(x, y)
@@ -105,9 +135,18 @@ class Particle:
                 self.trails.append(Trail(i, self.size, False))
 
     def apply_force(self, force):
+        """
+        应用力量，改变速度
+        :param force:
+        :return:
+        """
         self.acc += force
 
     def move(self):
+        """
+        移动粒子
+        :return:
+        """
         if not self.firework:
             self.vel.x *= 0.8
             self.vel.y *= 0.8
@@ -129,10 +168,19 @@ class Particle:
         self.life += 1
 
     def show(self, win):
+        """
+        在窗口上显示粒子
+        :param win:
+        :return:
+        """
         pygame.draw.circle(win, (self.colour[0], self.colour[1], self.colour[2], 0), (int(self.pos.x), int(self.pos.y)),
                            self.size)
 
     def decay(self):  # random decay of the particles
+        """
+        粒子衰减
+        :return:
+        """
         if 50 > self.life > 10:  # early stage their is a small chance of decay
             ran = randint(0, 30)
             if ran == 0:
@@ -143,6 +191,10 @@ class Particle:
                 self.remove = True
 
     def trail_update(self):
+        """
+        更新粒子尾迹
+        :return:
+        """
         self.prev_posx.pop()
         self.prev_posx.insert(0, int(self.pos.x))
         self.prev_posy.pop()
@@ -157,9 +209,16 @@ class Particle:
                           self.prev_posy[n + static_offset])
 
 
+# 定义尾迹类
 class Trail:
 
     def __init__(self, n, size, dynamic):
+        """
+        初始化尾迹的位置，大小，颜色等参数
+        :param n:
+        :param size:
+        :param dynamic:
+        """
         self.pos_in_line = n
         self.pos = vector(-10, -10)
         self.dynamic = dynamic
@@ -174,14 +233,31 @@ class Trail:
                 self.size = 0
 
     def get_pos(self, x, y):
+        """
+        获取尾迹的位置
+        :param x:
+        :param y:
+        :return:
+        """
         self.pos = vector(x, y)
 
     def show(self, win):
+        """
+        在窗口上显示尾迹
+        :param win:
+        :return:
+        """
         pygame.draw.circle(win, self.colour, (int(
             self.pos.x), int(self.pos.y)), self.size)
 
 
 def update(win, fireworks):
+    """
+    更新窗口和烟花
+    :param win:
+    :param fireworks:
+    :return:
+    """
     for fw in fireworks:
         fw.update(win)
         if fw.remove():
@@ -190,7 +266,10 @@ def update(win, fireworks):
     pygame.display.update()
 
 
+# 定义主函数，初始化 pygame，创建窗口，设置窗口标题，定义时钟，定义烟花列表，定义运行状态
+# 然后进入主循环，每帧更新窗口，创建新的烟花，更新烟花，直到用户退出程序
 def main():
+    print("点击 pygame 烟花界面之后，分别按下数字键 1 （会绽放新烟花）或者 2（会出现更多的烟花）")
     pygame.init()
     pygame.display.set_caption("Fireworks in Pygame")
     win = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
@@ -207,8 +286,10 @@ def main():
 
             if event.type == pygame.KEYDOWN:  # Change game speed with number keys
                 if event.key == pygame.K_1:  # number key 1
+                    print("按下数字键 1，可以绽放新的烟花")
                     fireworks.append(Firework())
                 if event.key == pygame.K_2:  # number key 2
+                    print("按下数字键 2，可以绽放更多的烟花")
                     for i in range(10):
                         fireworks.append(Firework())
         win.fill((20, 20, 30))  # draw background
