@@ -7,3 +7,4 @@
 - [哆啦A梦](./doraemon)
 - [皮卡丘](./pikachu)
 - [烟花效果](./fireworks)
+- [去除某些个人注释信息](./comments_remove)
