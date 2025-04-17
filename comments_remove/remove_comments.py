@@ -36,9 +36,12 @@ def process_file(filepath):
         print(f"处理 {filepath} 时出错: {str(e)}")
 
 
-def process_directory(directory, valid_extensions):
+def process_directory(directory, valid_extensions, ignore_folders):
     """递归处理目录"""
     for root, dirs, files in os.walk(directory):
+        # 被忽略的文件夹，就不要遍历了
+        dirs[:] = [d for d in dirs if d not in ignore_folders]
+
         for filename in files:
             filepath = os.path.join(root, filename)
 
@@ -60,6 +63,8 @@ if __name__ == "__main__":
         sys.exit(1)
 
     valid_extensions = {}  # 需要处理的文件扩展名
+    # ignore_folders = [".git", ".idea", "vendor", "runtime"]  # 忽略的文件夹名称列表
+    ignore_folders = []
 
-    process_directory(target_dir, valid_extensions)
+    process_directory(target_dir, valid_extensions, ignore_folders)
     print("处理完成！")
